@@ -1,3 +1,14 @@
+<div align="center">
+  <p>
+    <a align="center" href="" target="_blank">
+      <img
+        width="850"
+        src="https://media.roboflow.com/open-source/autodistill/autodistill-banner.png?3"
+      >
+    </a>
+  </p>
+</div>
+
 # Autodistill Florence 2 Module
 
 This repository contains the code supporting the CLIP base model for use with [Autodistill](https://github.com/autodistill/autodistill).
