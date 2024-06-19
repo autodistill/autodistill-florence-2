@@ -33,6 +33,8 @@ pip3 install autodistill-florence-2
 
 ```python
 from autodistill_florence_2 import Florence2
+from autodistill.detection import DetectionOntology
+from PIL import Image
 
 # define an ontology to map class names to our Florence 2 prompt
 # the ontology dictionary has the format {caption: class}
@@ -47,6 +49,18 @@ base_model = Florence2(
         }
     )
 )
+
+image = Image.open("image.jpeg")
+result = base_model.predict('image.jpeg')
+
+bounding_box_annotator = sv.BoundingBoxAnnotator()
+annotated_frame = bounding_box_annotator.annotate(
+    scene=image.copy(),
+    detections=detections
+)
+sv.plot_image(image=annotated_frame, size=(16, 16))
+
+# label a dataset
 base_model.label("./context_images", extension=".jpeg")
 ```
 
