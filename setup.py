@@ -11,16 +11,19 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="autodistill-base-model",
+    name="autodistill-florence-2",
     version=version,
-    author="",
-    author_email="",
-    description="Model for use with Autodistill",
+    author="Roboflow",
+    author_email="support@roboflow.com",
+    description=" Use Florence 2 to auto-label data for use in training fine-tuned object detection models. ",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="",
+    url="https://github.com/autodistill/autodistill-florence-2",
     install_requires=[
-        # list your requires
+        "transformers",
+        "einops",
+        "flash_attn",
+        "timm"
     ],
     packages=find_packages(exclude=("tests",)),
     extras_require={
