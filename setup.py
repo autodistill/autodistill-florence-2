@@ -23,7 +23,10 @@ setuptools.setup(
         "transformers",
         "einops",
         "flash_attn",
-        "timm"
+        "timm",
+        "numpy",
+        "supervision",
+        "roboflow"
     ],
     packages=find_packages(exclude=("tests",)),
     extras_require={

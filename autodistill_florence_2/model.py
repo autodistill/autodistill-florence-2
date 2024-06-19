@@ -18,6 +18,7 @@ def run_example(task_prompt, processor, model, image, text_input=None):
         prompt = task_prompt
     else:
         prompt = task_prompt + text_input
+
     inputs = processor(text=prompt, images=image, return_tensors="pt").to("cuda")
     generated_ids = model.generate(
         input_ids=inputs["input_ids"],
@@ -28,6 +29,7 @@ def run_example(task_prompt, processor, model, image, text_input=None):
         num_beams=3,
     )
     generated_text = processor.batch_decode(generated_ids, skip_special_tokens=False)[0]
+
     parsed_answer = processor.post_process_generation(
         generated_text, task=task_prompt, image_size=(image.width, image.height)
     )
@@ -51,26 +53,29 @@ class Florence2(DetectionBaseModel):
 
     def predict(self, input: str, confidence: int = 0.5) -> sv.Detections:
         image = load_image(input, return_format="PIL")
-        result = run_example("<OD>", self.processor, self.model, image)
-
         ontology_classes = self.ontology.classes()
+        result = run_example("<OPEN_VOCABULARY_DETECTION>", self.processor, self.model, image, " ".join(ontology_classes))
 
-        results = result["<OD>"]
-        boxes_and_labels = list(zip(results["bboxes"], results["labels"]))
+        results = result["<OPEN_VOCABULARY_DETECTION>"]
+
+        if len(results["bboxes"]) == 0:
+            return sv.Detections().empty()
+
+        boxes_and_labels = list(zip(results["bboxes"], results["bboxes_labels"]))
 
         detections = sv.Detections(
             xyxy=np.array(
-                [box for box, label in boxes_and_labels if label in ontology_classes]
+                [box for box, label in boxes_and_labels if label in ontology_classes and ontology_classes]
             ),
             class_id=np.array(
                 [
                     ontology_classes.index(label)
                     for box, label in boxes_and_labels
-                    if label in ontology_classes
+                    if label in ontology_classes and ontology_classes
                 ]
             ),
             confidence=np.array(
-                [1.0 for box, label in boxes_and_labels if label in ontology_classes]
+                [1.0 for box, label in boxes_and_labels if label in ontology_classes and ontology_classes]
             ),
         )
 
