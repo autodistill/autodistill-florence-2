@@ -58,10 +58,10 @@ class Florence2(DetectionBaseModel):
 
         results = result["<CAPTION_TO_PHRASE_GROUNDING>"]
 
-        if len(results["bboxes"]) == 0:
-            return sv.Detections().empty()
-
         boxes_and_labels = list(zip(results["bboxes"], results["labels"]))
+
+        if len([box for box, label in boxes_and_labels if label in ontology_classes and ontology_classes]) == 0:
+            return sv.Detections.empty()
 
         detections = sv.Detections(
             xyxy=np.array(
