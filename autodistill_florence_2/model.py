@@ -52,16 +52,16 @@ class Florence2(DetectionBaseModel):
         self.ontology = ontology
 
     def predict(self, input: str, confidence: int = 0.5) -> sv.Detections:
-        image = load_image(input, return_format="PIL")
+        image = Image.open(input)
         ontology_classes = self.ontology.classes()
-        result = run_example("<OPEN_VOCABULARY_DETECTION>", self.processor, self.model, image, " ".join(ontology_classes))
+        result = run_example("<CAPTION_TO_PHRASE_GROUNDING>", self.processor, self.model, image, "A photo of " + ", and ".join(ontology_classes) + ".")
 
-        results = result["<OPEN_VOCABULARY_DETECTION>"]
+        results = result["<CAPTION_TO_PHRASE_GROUNDING>"]
 
         if len(results["bboxes"]) == 0:
             return sv.Detections().empty()
 
-        boxes_and_labels = list(zip(results["bboxes"], results["bboxes_labels"]))
+        boxes_and_labels = list(zip(results["bboxes"], results["labels"]))
 
         detections = sv.Detections(
             xyxy=np.array(
