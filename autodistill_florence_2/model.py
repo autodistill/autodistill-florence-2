@@ -52,7 +52,7 @@ class Florence2(DetectionBaseModel):
         self.ontology = ontology
 
     def predict(self, input: str, confidence: int = 0.5) -> sv.Detections:
-        image = Image.open(input)
+        image = load_image(input, return_format="PIL")
         ontology_classes = self.ontology.classes()
         result = run_example("<CAPTION_TO_PHRASE_GROUNDING>", self.processor, self.model, image, "A photo of " + ", and ".join(ontology_classes) + ".")
 
