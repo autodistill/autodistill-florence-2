@@ -253,6 +253,7 @@ class Florence2Trainer(DetectionTargetModel):
 
         peft_model = get_peft_model(self.model, config)
         peft_model.print_trainable_parameters()
+        self.peft_model = peft_model
 
         torch.cuda.empty_cache()
 
