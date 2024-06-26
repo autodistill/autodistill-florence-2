@@ -1,3 +1,34 @@
+Metadata-Version: 2.1
+Name: autodistill-florence-2
+Version: 0.1.0
+Summary:  Use Florence 2 to auto-label data for use in training fine-tuned object detection models. 
+Home-page: https://github.com/autodistill/autodistill-florence-2
+Author: Roboflow
+Author-email: support@roboflow.com
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.7
+Description-Content-Type: text/markdown
+Requires-Dist: transformers
+Requires-Dist: einops
+Requires-Dist: flash_attn
+Requires-Dist: timm
+Requires-Dist: numpy
+Requires-Dist: supervision
+Requires-Dist: roboflow
+Requires-Dist: peft
+Requires-Dist: Pillow
+Requires-Dist: tqdm
+Requires-Dist: autodistill
+Provides-Extra: dev
+Requires-Dist: flake8; extra == "dev"
+Requires-Dist: black==22.3.0; extra == "dev"
+Requires-Dist: isort; extra == "dev"
+Requires-Dist: twine; extra == "dev"
+Requires-Dist: pytest; extra == "dev"
+Requires-Dist: wheel; extra == "dev"
+
 <div align="center">
   <p>
     <a align="center" href="" target="_blank">
@@ -29,7 +60,7 @@ To use Florence 2 with Autodistill, you need to install the following dependency
 pip3 install autodistill-florence-2
 ```
 
-## Quickstart (Inference from Base Weights)
+## Quickstart
 
 ```python
 from autodistill_florence_2 import Florence2
@@ -62,15 +93,6 @@ sv.plot_image(image=annotated_frame, size=(16, 16))
 
 # label a dataset
 base_model.label("./context_images", extension=".jpeg")
-```
-
-## Quickstart (Fine-Tune)
-
-```python
-from autodistill_florence_2 import Florence2Trainer
-
-model = Florence2Trainer("dataset")
-model.train(dataset.location, epochs=10)
 ```
 
 ## License
