@@ -23,7 +23,6 @@ setuptools.setup(
     install_requires=[
         "transformers",
         "einops",
-        "flash_attn",
         "timm",
         "numpy",
         "supervision",
