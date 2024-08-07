@@ -35,6 +35,7 @@ pip3 install autodistill-florence-2
 from autodistill_florence_2 import Florence2
 from autodistill.detection import DetectionOntology
 from PIL import Image
+import supervision as sv
 
 # define an ontology to map class names to our Florence 2 prompt
 # the ontology dictionary has the format {caption: class}
