@@ -11,7 +11,7 @@
 
 # Autodistill Florence 2 Module
 
-This repository contains the code supporting the CLIP base model for use with [Autodistill](https://github.com/autodistill/autodistill).
+This repository contains the code supporting the Florence 2 base model for use with [Autodistill](https://github.com/autodistill/autodistill).
 
 [Florence 2](https://huggingface.co/microsoft/Florence-2-large), introduced in the paper [Florence-2: Advancing a Unified Representation for a Variety of Vision Tasks](https://arxiv.org/abs/2311.06242) is a multimodal vision model.
 
