@@ -19,7 +19,7 @@ You can use Florence 2 to generate object detection annotations for use in train
 
 Read the full [Autodistill documentation](https://autodistill.github.io/autodistill/).
 
-Read the [Florence 2 Autodistill documentation](https://autodistill.github.io/autodistill/base_models/florence2/).
+Read the [Florence 2 Autodistill documentation](https://docs.autodistill.com/target_models/florence2/).
 
 ## Installation
 
