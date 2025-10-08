@@ -21,7 +21,7 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/autodistill/autodistill-florence-2",
     install_requires=[
-        "transformers",
+        "transformers==4.49.0",
         "einops",
         "timm",
         "numpy",
